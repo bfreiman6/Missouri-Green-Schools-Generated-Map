@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/SchoolDistricts_0.js"></script>
+        <script src="data/LargerHazardousWasteSites_1.js"></script>
+        <script src="data/HazardousWasteSites_2.js"></script>
+        <script src="data/Hazardous_Waste_CSV_3.js"></script>
+        <script src="data/PartnerCoordinatesSheet11_4.js"></script>
+        <script src="data/MOSchoolStatistics_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:5
+        }).fitBounds([[35.0261233919589,-96.13644960214336],[41.73981165954357,-89.26424369490738]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'feet',
+            secondaryLengthUnit: 'miles',
+            primaryAreaUnit: 'sqfeet',
+            secondaryAreaUnit: 'sqmiles'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_SchoolDistricts_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">District Name</th>\
+                        <td>' + (feature.properties['District Name'] !== null ? autolinker.link(feature.properties['District Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Grade Level</th>\
+                        <td>' + (feature.properties['Grade Level'] !== null ? autolinker.link(feature.properties['Grade Level'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VOCATIONAL</th>\
+                        <td>' + (feature.properties['VOCATIONAL'] !== null ? autolinker.link(feature.properties['VOCATIONAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VOCDIST</th>\
+                        <td>' + (feature.properties['VOCDIST'] !== null ? autolinker.link(feature.properties['VOCDIST'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SchoolDistricts_0_0() {
+            return {
+                pane: 'pane_SchoolDistricts_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,220,142,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SchoolDistricts_0');
+        map.getPane('pane_SchoolDistricts_0').style.zIndex = 400;
+        map.getPane('pane_SchoolDistricts_0').style['mix-blend-mode'] = 'normal';
+        var layer_SchoolDistricts_0 = new L.geoJson(json_SchoolDistricts_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SchoolDistricts_0',
+            layerName: 'layer_SchoolDistricts_0',
+            pane: 'pane_SchoolDistricts_0',
+            onEachFeature: pop_SchoolDistricts_0,
+            style: style_SchoolDistricts_0_0,
+        });
+        bounds_group.addLayer(layer_SchoolDistricts_0);
+        map.addLayer(layer_SchoolDistricts_0);
+        function pop_LargerHazardousWasteSites_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Site_Facility_Name</th>\
+                        <td>' + (feature.properties['Site_Facility_Name'] !== null ? autolinker.link(feature.properties['Site_Facility_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LargerHazardousWasteSites_1_0() {
+            return {
+                pane: 'pane_LargerHazardousWasteSites_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,23,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LargerHazardousWasteSites_1');
+        map.getPane('pane_LargerHazardousWasteSites_1').style.zIndex = 401;
+        map.getPane('pane_LargerHazardousWasteSites_1').style['mix-blend-mode'] = 'normal';
+        var layer_LargerHazardousWasteSites_1 = new L.geoJson(json_LargerHazardousWasteSites_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LargerHazardousWasteSites_1',
+            layerName: 'layer_LargerHazardousWasteSites_1',
+            pane: 'pane_LargerHazardousWasteSites_1',
+            onEachFeature: pop_LargerHazardousWasteSites_1,
+            style: style_LargerHazardousWasteSites_1_0,
+        });
+        bounds_group.addLayer(layer_LargerHazardousWasteSites_1);
+        map.addLayer(layer_LargerHazardousWasteSites_1);
+        function pop_HazardousWasteSites_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Site Name</th>\
+                        <td>' + (feature.properties['Site Name'] !== null ? autolinker.link(feature.properties['Site Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Alternative Site Name</th>\
+                        <td>' + (feature.properties['Alternative Site Name'] !== null ? autolinker.link(feature.properties['Alternative Site Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ADDRESS</th>\
+                        <td>' + (feature.properties['ADDRESS'] !== null ? autolinker.link(feature.properties['ADDRESS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CITY</th>\
+                        <td>' + (feature.properties['CITY'] !== null ? autolinker.link(feature.properties['CITY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ZIP</th>\
+                        <td>' + (feature.properties['ZIP'] !== null ? autolinker.link(feature.properties['ZIP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COUNTY</th>\
+                        <td>' + (feature.properties['COUNTY'] !== null ? autolinker.link(feature.properties['COUNTY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site History</th>\
+                        <td>' + (feature.properties['Site History'] !== null ? autolinker.link(feature.properties['Site History'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Cleanup Summary</th>\
+                        <td>' + (feature.properties['Cleanup Summary'] !== null ? autolinker.link(feature.properties['Cleanup Summary'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contaminants </th>\
+                        <td>' + (feature.properties['Contaminants '] !== null ? autolinker.link(feature.properties['Contaminants '].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Use Limits</th>\
+                        <td>' + (feature.properties['Use Limits'] !== null ? autolinker.link(feature.properties['Use Limits'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">URL</th>\
+                        <td>' + (feature.properties['URL'] !== null ? autolinker.link(feature.properties['URL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_HazardousWasteSites_2_0() {
+            return {
+                pane: 'pane_HazardousWasteSites_2',
+                radius: 4.766666666666662,
+                opacity: 1,
+                color: 'rgba(184,8,8,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,8,8,1.0)',
+                interactive: true,
+            }
+        }
+        function style_HazardousWasteSites_2_1() {
+            return {
+                pane: 'pane_HazardousWasteSites_2',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_HazardousWasteSites_2');
+        map.getPane('pane_HazardousWasteSites_2').style.zIndex = 402;
+        map.getPane('pane_HazardousWasteSites_2').style['mix-blend-mode'] = 'normal';
+        var layer_HazardousWasteSites_2 = new L.geoJson.multiStyle(json_HazardousWasteSites_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HazardousWasteSites_2',
+            layerName: 'layer_HazardousWasteSites_2',
+            pane: 'pane_HazardousWasteSites_2',
+            onEachFeature: pop_HazardousWasteSites_2,
+            pointToLayers: [function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_HazardousWasteSites_2_0(feature));
+            },function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_HazardousWasteSites_2_1(feature));
+            },
+        ]});
+        var cluster_HazardousWasteSites_2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_HazardousWasteSites_2.addLayer(layer_HazardousWasteSites_2);
+
+        bounds_group.addLayer(layer_HazardousWasteSites_2);
+        cluster_HazardousWasteSites_2.addTo(map);
+        function pop_Hazardous_Waste_CSV_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Site/Facility Name</th>\
+                        <td>' + (feature.properties['Site/Facility Name'] !== null ? autolinker.link(feature.properties['Site/Facility Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Alias(es)</th>\
+                        <td>' + (feature.properties['Alias(es)'] !== null ? autolinker.link(feature.properties['Alias(es)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Address</th>\
+                        <td>' + (feature.properties['Address'] !== null ? autolinker.link(feature.properties['Address'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">City</th>\
+                        <td>' + (feature.properties['City'] !== null ? autolinker.link(feature.properties['City'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ZIP</th>\
+                        <td>' + (feature.properties['ZIP'] !== null ? autolinker.link(feature.properties['ZIP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">County</th>\
+                        <td>' + (feature.properties['County'] !== null ? autolinker.link(feature.properties['County'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site Status</th>\
+                        <td>' + (feature.properties['Site Status'] !== null ? autolinker.link(feature.properties['Site Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site Background/History</th>\
+                        <td>' + (feature.properties['Site Background/History'] !== null ? autolinker.link(feature.properties['Site Background/History'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site Cleanup Summary</th>\
+                        <td>' + (feature.properties['Site Cleanup Summary'] !== null ? autolinker.link(feature.properties['Site Cleanup Summary'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contaminants of Concern</th>\
+                        <td>' + (feature.properties['Contaminants of Concern'] !== null ? autolinker.link(feature.properties['Contaminants of Concern'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Activity & Use Limitations</th>\
+                        <td>' + (feature.properties['Activity & Use Limitations'] !== null ? autolinker.link(feature.properties['Activity & Use Limitations'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DNR web page link</th>\
+                        <td>' + (feature.properties['DNR web page link'] !== null ? autolinker.link(feature.properties['DNR web page link'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Hazardous_Waste_CSV_3_0() {
+            return {
+                pane: 'pane_Hazardous_Waste_CSV_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,90,153,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Hazardous_Waste_CSV_3');
+        map.getPane('pane_Hazardous_Waste_CSV_3').style.zIndex = 403;
+        map.getPane('pane_Hazardous_Waste_CSV_3').style['mix-blend-mode'] = 'normal';
+        var layer_Hazardous_Waste_CSV_3 = new L.geoJson(json_Hazardous_Waste_CSV_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Hazardous_Waste_CSV_3',
+            layerName: 'layer_Hazardous_Waste_CSV_3',
+            pane: 'pane_Hazardous_Waste_CSV_3',
+            onEachFeature: pop_Hazardous_Waste_CSV_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Hazardous_Waste_CSV_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Hazardous_Waste_CSV_3);
+        map.addLayer(layer_Hazardous_Waste_CSV_3);
+        function pop_PartnerCoordinatesSheet11_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NAME</th>\
+                        <td>' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PartnerCoordinatesSheet11_4_0() {
+            return {
+                pane: 'pane_PartnerCoordinatesSheet11_4',
+                radius: 4.4,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_PartnerCoordinatesSheet11_4');
+        map.getPane('pane_PartnerCoordinatesSheet11_4').style.zIndex = 404;
+        map.getPane('pane_PartnerCoordinatesSheet11_4').style['mix-blend-mode'] = 'normal';
+        var layer_PartnerCoordinatesSheet11_4 = new L.geoJson(json_PartnerCoordinatesSheet11_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PartnerCoordinatesSheet11_4',
+            layerName: 'layer_PartnerCoordinatesSheet11_4',
+            pane: 'pane_PartnerCoordinatesSheet11_4',
+            onEachFeature: pop_PartnerCoordinatesSheet11_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_PartnerCoordinatesSheet11_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_PartnerCoordinatesSheet11_4);
+        map.addLayer(layer_PartnerCoordinatesSheet11_4);
+        function pop_MOSchoolStatistics_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">School District</th>\
+                        <td>' + (feature.properties['School District'] !== null ? autolinker.link(feature.properties['School District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">School</th>\
+                        <td>' + (feature.properties['School'] !== null ? autolinker.link(feature.properties['School'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Street Address</th>\
+                        <td>' + (feature.properties['Street Address'] !== null ? autolinker.link(feature.properties['Street Address'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">City</th>\
+                        <td>' + (feature.properties['City'] !== null ? autolinker.link(feature.properties['City'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">State</th>\
+                        <td>' + (feature.properties['State'] !== null ? autolinker.link(feature.properties['State'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Zip Code</th>\
+                        <td>' + (feature.properties['Zip Code'] !== null ? autolinker.link(feature.properties['Zip Code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PHONE'] !== null ? autolinker.link(feature.properties['PHONE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Free and Reduced Lunch Percent</th>\
+                        <td>' + (feature.properties['Free and Reduced Lunch Percent'] !== null ? autolinker.link(feature.properties['Free and Reduced Lunch Percent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Total Students'] !== null ? autolinker.link(feature.properties['Total Students'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type of Environment</th>\
+                        <td>' + (feature.properties['Type of Environment'] !== null ? autolinker.link(feature.properties['Type of Environment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">County</th>\
+                        <td>' + (feature.properties['County'] !== null ? autolinker.link(feature.properties['County'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Title I</th>\
+                        <td>' + (feature.properties['Title I'] !== null ? autolinker.link(feature.properties['Title I'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Grade Level</th>\
+                        <td>' + (feature.properties['Grade Level'] !== null ? autolinker.link(feature.properties['Grade Level'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MOSchoolStatistics_5_0() {
+            return {
+                pane: 'pane_MOSchoolStatistics_5',
+                radius: 3.5999999999999996,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(84,176,74,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MOSchoolStatistics_5');
+        map.getPane('pane_MOSchoolStatistics_5').style.zIndex = 405;
+        map.getPane('pane_MOSchoolStatistics_5').style['mix-blend-mode'] = 'normal';
+        var layer_MOSchoolStatistics_5 = new L.geoJson(json_MOSchoolStatistics_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MOSchoolStatistics_5',
+            layerName: 'layer_MOSchoolStatistics_5',
+            pane: 'pane_MOSchoolStatistics_5',
+            onEachFeature: pop_MOSchoolStatistics_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_MOSchoolStatistics_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_MOSchoolStatistics_5);
+        map.addLayer(layer_MOSchoolStatistics_5);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_MOSchoolStatistics_5,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'School'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        </script>
+    </body>
+</html>
